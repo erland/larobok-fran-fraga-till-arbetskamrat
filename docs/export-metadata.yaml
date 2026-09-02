@@ -1,0 +1,54 @@
+title: "Från fråga till arbetskamrat"
+subtitle: "Från enkla frågor till moget AI-assisterat arbete"
+author: "Erland Lindmark"
+language: "sv"
+difficulty: "experienced"
+audience: "Personer som arbetar med systemutveckling och IT-arkitektur"
+book_type: "textbook"
+edition: "1"
+version: "1.5.0"
+date: "2026-09-02"
+rights: "All rights reserved"
+publisher: ""
+cover_image: "assets/cover.png"
+identifier: "urn:uuid:935bfaa3-6393-43d4-a8ca-6cbbf3676b0c"
+creator_role: "aut"
+subject: "AI-assisterat arbete, systemutveckling, IT-arkitektur, mognadsresa"
+description: "En faktabok om hur arbetssätt med generativ AI utvecklas från enkla frågor till kontextmedvetet samarbete, delegering och orkestrerade arbetsflöden genom systemutvecklingsprocessen."
+project_slug: "fran-fraga-till-arbetskamrat"
+zip_naming:
+  initial: "fran-fraga-till-arbetskamrat-projekt.zip"
+  chapter_update: "fran-fraga-till-arbetskamrat-projekt-kapitel-NN.zip"
+chapters:
+  - chapters/00-inledning.md
+  - chapters/01-nar-dialogen-blev-ett-arbetsverktyg.md
+  - chapters/02-hur-ai-redan-anvands-i-systemutveckling.md
+  - chapters/03-produktivitet-ar-mer-an-att-gora-samma-sak-snabbare.md
+  - chapters/04-fas-1-fraga.md
+  - chapters/05-fas-2-resonera.md
+  - chapters/06-fas-3-skapa.md
+  - chapters/07-fas-4-samarbeta.md
+  - chapters/08-fas-5-ge-kontext.md
+  - chapters/09-fas-6-delegera.md
+  - chapters/10-fas-7-orkestrera.md
+  - chapters/11-fran-behov-och-krav-till-losningside.md
+  - chapters/12-fran-arkitektur-och-design-till-implementation.md
+  - chapters/13-fran-test-och-kvalitet-till-leverans.md
+  - chapters/14-det-manniskan-fortfarande-maste-vara-bra-pa.md
+  - chapters/15-nar-ai-behover-kanna-till-det-som-inte-ar-publikt.md
+  - chapters/16-fran-individuell-ai-anvandning-till-ai-assisterat-arbetssystem.md
+exports:
+  epub:
+    enabled: true
+    include_text_toc: false
+    airy_layout: true
+    render_markdown_styles: true
+  pdf:
+    enabled: true
+    include_toc_before_introduction: true
+    render_markdown_styles: true
+  docx:
+    enabled: true
+    render_markdown_styles: true
+  markdown:
+    enabled: true

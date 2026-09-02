@@ -1,0 +1,48 @@
+body { line-height: 1.62; margin: 5%; }
+p { margin: 0 0 0.85em 0; }
+h1, h2, h3 { line-height: 1.2; }
+h1 { text-align: center; margin: 1.8em 0 0.8em 0; }
+h2 { margin-top: 1.6em; }
+h3 { margin-top: 1.3em; }
+blockquote { margin: 1em 1.5em; }
+pre { padding: 0.8em; overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+th, td { border: 1px solid #999; padding: 0.45em; vertical-align: top; }
+img { max-width: 100%; height: auto; }
+
+/* Numrerade kapitelrubriker: två centrerade rader även i EPUB. */
+h1 .chapter-number,
+h1 .chapter-name {
+  display: block;
+  text-align: center;
+}
+h1 .chapter-number {
+  font-size: 0.65em;
+  font-weight: 600;
+  margin-bottom: 0.45em;
+}
+h1 .chapter-name {
+  font-size: 1em;
+  font-weight: 700;
+}
+nav#TOC .chapter-number,
+nav#TOC .chapter-name,
+nav[role="doc-toc"] .chapter-number,
+nav[role="doc-toc"] .chapter-name {
+  display: inline;
+}
+nav#TOC .chapter-number::after,
+nav[role="doc-toc"] .chapter-number::after {
+  content: " – ";
+}
+
+/* Pandoc task lists: keep the checkbox and its label on the same line. */
+ul.task-list { list-style: none; margin-left: 0; padding-left: 0; }
+ul.task-list li > label { display: inline; }
+ul.task-list input[type="checkbox"] {
+  display: inline-block;
+  width: 0.76em;
+  height: 0.76em;
+  margin: 0 0.42em 0 0;
+  vertical-align: -0.08em;
+}

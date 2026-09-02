@@ -1,0 +1,9 @@
+# Generated book outputs and build intermediates
+build/
+exports/*.pdf
+exports/*.epub
+
+# Local/editor files
+.DS_Store
+*.pyc
+__pycache__/

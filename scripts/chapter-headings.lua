@@ -41,7 +41,7 @@ function Header(el)
 
   el.content = pandoc.Inlines{
     pandoc.Span(pandoc.Inlines{pandoc.Str(label)}, pandoc.Attr('', {'chapter-number'})),
-    pandoc.Space(),
+    pandoc.Span(pandoc.Inlines{pandoc.Str(' – ')}, pandoc.Attr('', {'chapter-separator'})),
     pandoc.Span(title_inlines, pandoc.Attr('', {'chapter-name'}))
   }
   return el

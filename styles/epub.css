@@ -16,6 +16,8 @@ h1 .chapter-name {
   display: block;
   text-align: center;
 }
+h1 .chapter-separator { display: none; }
+
 h1 .chapter-number {
   font-size: 0.65em;
   font-weight: 600;
@@ -28,14 +30,11 @@ h1 .chapter-name {
 nav#TOC .chapter-number,
 nav#TOC .chapter-name,
 nav[role="doc-toc"] .chapter-number,
-nav[role="doc-toc"] .chapter-name {
+nav[role="doc-toc"] .chapter-name,
+nav#TOC .chapter-separator,
+nav[role="doc-toc"] .chapter-separator {
   display: inline;
 }
-nav#TOC .chapter-number::after,
-nav[role="doc-toc"] .chapter-number::after {
-  content: " – ";
-}
-
 /* Pandoc task lists: keep the checkbox and its label on the same line. */
 ul.task-list { list-style: none; margin-left: 0; padding-left: 0; }
 ul.task-list li > label { display: inline; }
@@ -45,4 +44,34 @@ ul.task-list input[type="checkbox"] {
   height: 0.76em;
   margin: 0 0.42em 0 0;
   vertical-align: -0.08em;
+}
+
+/* EPUB-titelsida: matcha PDF:ens centrerade grundkomposition. */
+header#title-block-header,
+section.titlepage,
+div.titlepage {
+  text-align: center !important;
+  width: 100%;
+}
+header#title-block-header .title,
+header#title-block-header .subtitle,
+header#title-block-header .author,
+header#title-block-header .date,
+section.titlepage .title,
+section.titlepage .subtitle,
+section.titlepage .author,
+div.titlepage .title,
+div.titlepage .subtitle,
+div.titlepage .author {
+  text-align: center !important;
+}
+header#title-block-header .title {
+  margin-top: 2.2em;
+  margin-bottom: 0.5em;
+}
+header#title-block-header .subtitle {
+  margin: 0.5em auto 1.8em auto;
+}
+header#title-block-header .author {
+  margin: 0.5em auto;
 }

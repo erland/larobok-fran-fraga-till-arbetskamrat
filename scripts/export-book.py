@@ -4,6 +4,9 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
+import zipfile
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent.parent
 META = ROOT / 'docs' / 'export-metadata.yaml'
@@ -88,6 +91,37 @@ def build_combined() -> tuple[str, list[str]]:
     return text + '\n\n' + '\n'.join(source_md), missing
 
 
+def postprocess_epub(epub: Path) -> None:
+    """Keep EPUB navigation index, but remove nav.xhtml from normal reading order."""
+    with tempfile.TemporaryDirectory() as td:
+        temp = Path(td)
+        with zipfile.ZipFile(epub, 'r') as zf:
+            zf.extractall(temp)
+
+        opf = temp / 'EPUB' / 'content.opf'
+        ns = {'opf': 'http://www.idpf.org/2007/opf'}
+        ET.register_namespace('', ns['opf'])
+        tree = ET.parse(opf)
+        root = tree.getroot()
+        spine = root.find('opf:spine', ns)
+        if spine is None:
+            raise RuntimeError('Kunde inte hitta EPUB spine i content.opf')
+        for itemref in list(spine):
+            if itemref.get('idref') == 'nav':
+                spine.remove(itemref)
+        tree.write(opf, encoding='utf-8', xml_declaration=True)
+
+        rebuilt = epub.with_suffix('.tmp.epub')
+        with zipfile.ZipFile(rebuilt, 'w') as zf:
+            mimetype = temp / 'mimetype'
+            zf.write(mimetype, 'mimetype', compress_type=zipfile.ZIP_STORED)
+            for path in sorted(temp.rglob('*')):
+                if not path.is_file() or path == mimetype:
+                    continue
+                zf.write(path, path.relative_to(temp).as_posix(), compress_type=zipfile.ZIP_DEFLATED)
+        rebuilt.replace(epub)
+
+
 def run(cmd):
     subprocess.run(cmd, check=True)
 
@@ -134,6 +168,7 @@ def main() -> int:
         '--metadata', 'author=Erland Lindmark', '--metadata', 'lang=sv-SE',
         f'--epub-cover-image={COVER}', f'--css={EPUB_CSS}', f'--output={epub}'
     ])
+    postprocess_epub(epub)
 
     html = build / 'book.html'
     run([

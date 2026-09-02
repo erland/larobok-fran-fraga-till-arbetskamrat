@@ -187,10 +187,17 @@ Modellen är låst efter researchpass v1 som bokens pedagogiska syntes, men kan 
 Första PDF- och EPUB-exporten är genomförd och verifierad. PDF använder 6 × 9 tum och omfattar 267 fysiska sidor inklusive omslag och källförteckning; huvudbok inklusive bilagor ryms till cirka sida 250. Se `docs/layoutprov-v1.md`.
 
 
-## 2026-09-02 – Layoutrevision v1.6
+## 2026-09-02 – Layoutrevision v1.7
 
 - Checklistor i Bilaga B har justerats så checkbox och text ligger på samma rad i PDF och EPUB.
 - Inledning och bilagor använder nu samma visuella två-radsprincip som kapitelstarter: typetikett på första raden och rubriknamn centrerat under.
 - Innehållsförteckningen behåller de fullständiga rubrikerna kompakt på en rad.
 - Exporten har byggts om lokalt och PDF-layouten har verifierats på inledningen, Bilaga B och checklistan.
 - GitHub Actions från v1.5 använder fortsatt samma exportskript och får därmed automatiskt de nya layoutreglerna.
+
+
+## EPUB-layout v1.7
+
+- EPUB:s navigationsindex behålls men ligger inte längre i läsordningen som en vanlig innehållsförteckningssida.
+- Navigationsindexet visar skiljetecknet `–` mellan Kapitel/Bilaga/Inledning och rubriknamnet.
+- EPUB:s titelsida centrerar titel, undertitel och författare i linje med PDF-versionens grundkomposition.

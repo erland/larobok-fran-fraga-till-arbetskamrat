@@ -75,3 +75,9 @@ header#title-block-header .subtitle {
 header#title-block-header .author {
   margin: 0.5em auto;
 }
+
+/* Copyright/kolofonsida. */
+.copyright-page { margin-top: 4em; }
+.copyright-content { max-width: 34em; margin: 0 auto; }
+.copyright-content p { margin: 0 0 0.9em 0; }
+.copyright-small { font-size: 0.88em; }

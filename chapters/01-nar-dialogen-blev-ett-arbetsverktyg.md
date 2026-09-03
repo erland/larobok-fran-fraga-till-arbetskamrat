@@ -270,6 +270,4 @@ För varje uppgift, fråga sedan:
 3. Vad skulle vara dyrast att få fel?
 4. Hur skulle du verifiera resultatet?
 
-Du behöver inte använda AI i uppgiften. Syftet är att börja se arbetet som en kombination av moment med olika lämplig arbetsfördelning.
 
-I nästa kapitel lämnar vi tekniken och tittar på hur AI faktiskt används i systemutveckling – och på den tydliga skillnaden mellan hög användning och högt förtroende.

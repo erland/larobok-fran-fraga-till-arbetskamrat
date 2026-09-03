@@ -1,5 +1,18 @@
 # Projektstatus
 
+## Status v1.8 – Slutgranskning v1
+
+- Hela läsartexten har genomgått en ny slutgranskning efter layoutrevisionen.
+- Inledningen förklarar nu explicit hur forskning, mätdata, leverantörsuppgifter och bokens egna synteser skiljs åt.
+- Kapitel 15:s färskhetskänsliga källor har kontrollerats den 2 september 2026; EDPB Guidelines 02/2026 är fortfarande ett konsultationsutkast med öppet samråd till 30 oktober 2026.
+- Onödigt korta kapitelslutsidor i PDF har minskats genom att ta bort två redundanta övergångsstycken i kapitel 1–2.
+- Se `docs/slutgranskning-v1.md` för samlad bedömning och återstående release-steg.
+- Ren lokal checkout-simulering utan tidigare build/export har verifierat att exportskriptet kan bygga PDF och EPUB från projektkällorna.
+
+## Version
+
+1.8.0 – slutgranskning v1, evidensförtydligande och riktade layoutkorrigeringar.
+
 ## Status v1.5 – Kapitelrubriker och GitHub Actions
 
 - Numrerade kapitelrubriker visas vid export på två horisontellt centrerade rader: **Kapitel N** och därefter kapitelnamnet.
@@ -201,3 +214,17 @@ Första PDF- och EPUB-exporten är genomförd och verifierad. PDF använder 6 ×
 - EPUB:s navigationsindex behålls men ligger inte längre i läsordningen som en vanlig innehållsförteckningssida.
 - Navigationsindexet visar skiljetecknet `–` mellan Kapitel/Bilaga/Inledning och rubriknamnet.
 - EPUB:s titelsida centrerar titel, undertitel och författare i linje med PDF-versionens grundkomposition.
+
+## Release candidate 1 – 2026-09-02
+
+Projektet är nu satt till `v1.0.0-rc.1`.
+
+Publiceringsfinishen omfattar:
+
+- separat copyright-/kolofonsida i PDF och EPUB,
+- baksidestext i `docs/baksidestext.md`,
+- kort författarpresentation i boken och en extern version i `docs/forfattarpresentation.md`,
+- svenska rättighetsuppgifter och RC-metadata,
+- fortsatt stöd för manuell GitHub Actions-build och automatisk build vid publicerad release.
+
+RC:n ska verifieras från ren checkout och därefter i GitHub Actions innan `v1.0.0`.

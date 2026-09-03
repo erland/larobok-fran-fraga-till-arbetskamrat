@@ -197,4 +197,3 @@ Vilka av dessa påståenden stämmer?
 
 Se inte listan som ett test där flest kryss vinner. Försök i stället identifiera **vilka arbetsformer du har tillgång till** och vilka du ännu sällan använder.
 
-I nästa kapitel tar vi itu med den kanske viktigaste frågan av alla: blir arbetet faktiskt bättre?

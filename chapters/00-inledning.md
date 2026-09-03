@@ -64,6 +64,16 @@ Dessutom kommer du sannolikt att befinna dig på olika steg samtidigt. Du kanske
 
 Det är inte inkonsekvent. Det är ofta ett tecken på mognad.
 
+## Så skiljer boken evidens från syntes
+
+Boken blandar medvetet forskning, mätdata, leverantörsuppgifter och egna pedagogiska modeller. De fyller olika funktioner och ska inte vägas lika.
+
+När ett påstående bygger på forskning eller mätning försöker texten därför säga **vilken sorts underlag det är**: exempelvis randomiserat experiment, peer-reviewad studie, enkät eller produkttelemetri. När en uppgift kommer från en AI-leverantörs dokumentation framgår det att det är en **leverantörsuppgift**, inte en oberoende säkerhets- eller effektstudie.
+
+Formuleringar som **Bokens syntes** markerar i stället modeller och slutsatser som denna bok använder för att göra forsknings- och erfarenhetsmaterialet praktiskt användbart. Sjufasmodellen är det viktigaste exemplet.
+
+Källhänvisningar visas som K-ID, till exempel `K-008`, och den samlade källförteckningen anger både evidenstyp och avsändare. Poängen är att du som läsare ska kunna skilja mellan **vad som har mätts**, **vad en leverantör uppger** och **vad boken drar för pedagogisk slutsats av materialet**.
+
 ## Mognad betyder inte maximal autonomi
 
 Det är frestande att beskriva AI-mognad som en rak linje där varje steg innebär att människan gör mindre och AI:n gör mer. Den bilden är missvisande.

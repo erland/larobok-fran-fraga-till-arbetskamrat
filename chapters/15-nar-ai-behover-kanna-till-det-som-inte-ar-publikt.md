@@ -88,7 +88,7 @@ OpenAI anger för sina företagsprodukter och API att organisationers in- och ut
 
 Anthropic anger på motsvarande sätt att data från kommersiella produkter som Claude for Work och API inte används för modellträning som standard. Samtidigt anger Anthropic en standardretention på upp till 30 dagar för API-data om inget annat avtalats, medan chatprodukter kan lagra konversationer för att tillhandahålla historik. [K-073] [K-074]
 
-Microsoft anger att prompts, svar och data som Microsoft 365 Copilot hämtar via Microsoft Graph inte används för att träna foundation models. Samma dokumentation beskriver samtidigt att prompts och svar lagras som en del av användarens Copilot activity history och hanteras inom Microsoft 365:s retention- och compliancefunktioner. [K-076] [K-077]
+Microsoft anger att prompts, svar och data som Microsoft 365 Copilot hämtar via Microsoft Graph inte används för att träna grundmodeller (foundation models). Samma dokumentation beskriver samtidigt att prompts och svar lagras som en del av användarens Copilot activity history och hanteras inom Microsoft 365:s retention- och compliancefunktioner. [K-076] [K-077]
 
 Google anger för kvalificerade Workspace-erbjudanden med Gemini att organisationens innehåll inte används för att träna generativa modeller utanför organisationens domän utan tillstånd. Samtidigt varierar retention mellan olika Gemini-funktioner och kan styras av administratörer. [K-078]
 
@@ -265,7 +265,7 @@ För verklig anonymisering måste risken att identifiera personen vara tillräck
 
 Det är ett betydligt högre krav än att ta bort namn.
 
-EDPB publicerade i juli 2026 ett nytt utkast till riktlinjer om anonymisering. Vid denna boks researchdatum är det fortfarande ett **konsultationsutkast**, och ska därför inte behandlas som slutlig vägledning. [K-082]
+EDPB publicerade i juli 2026 ett utkast till riktlinjer om anonymisering. Vid bokens färskhetskontroll i september 2026 är samrådet fortfarande öppet till den 30 oktober 2026. Dokumentet är alltså ett **konsultationsutkast** och ska inte behandlas som slutlig vägledning. [K-082]
 
 Det viktigaste praktiska rådet är därför:
 

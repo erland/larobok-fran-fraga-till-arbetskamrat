@@ -3,14 +3,14 @@
 **Undertitel:** Från enkla frågor till moget AI-assisterat arbete  
 **Författare:** Erland Lindmark  
 **Språk:** Svenska  
-**Status:** Projekt v1.5 – kapitelrubriker reviderade; GitHub Actions för PDF/EPUB tillagda
+**Status:** Release candidate 1 (`v1.0.0-rc.1`) – manus, publiceringsfinish och exportflöde klara för RC-test
 
 Detta projekt innehåller planering, researchunderlag och manus för faktaboken *Från fråga till arbetskamrat*.
 Boken beskriver hur personer som arbetar med systemutveckling och IT-arkitektur successivt utvecklar sitt sätt att arbeta med generativ AI: från enkla frågor till kontextmedvetet samarbete, delegering och AI-assisterade arbetsflöden.
 
 ## Nuvarande fas
 
-Researchpass v1–v9 är genomförda och inledningen samt kapitel 1–16 är skrivna som första manusutkast. Hela den sjufasiga mognadsresan finns i manus, och Del III prövar modellen genom ett sammanhängande scenario från behov och krav till arkitektur, implementation, test och leverans.
+Researchpass v1–v9 är genomförda och inledningen samt kapitel 1–16 är skrivna, språkredigerade och helhetsgranskade. Hela den sjufasiga mognadsresan finns i manus, och Del III prövar modellen genom ett sammanhängande scenario från behov och krav till arkitektur, implementation, test och leverans.
 
 Mognadsmodellen behandlas fortsatt som bokens pedagogiska syntes. Repertoar, situationsanpassning och kontroll är viktigare än maximal autonomi. Researchpass v5 preciserar dessutom att orkestrering betyder design av ett AI-assisterat arbetssystem och **inte** automatiskt multi-agent.
 
@@ -39,6 +39,9 @@ Mognadsmodellen behandlas fortsatt som bokens pedagogiska syntes. Repertoar, sit
 - `docs/projektstatus.md` – beslut, öppna frågor och nästa steg.
 - `docs/export-guide.md` – lokal PDF/EPUB-export.
 - `docs/github-actions.md` – manuell build och release-build i GitHub Actions.
+- `docs/baksidestext.md` – fastställd baksidestext för publicering/listning.
+- `docs/forfattarpresentation.md` – kort och bokanpassad författarpresentation.
+- `frontmatter/copyright.html` – copyright-/kolofoninformation som infogas i PDF och EPUB.
 
 ## Planerad arbetsordning
 
@@ -47,6 +50,6 @@ Mognadsmodellen behandlas fortsatt som bokens pedagogiska syntes. Repertoar, sit
 3. Skapa omslag och besluta om eventuella inre illustrationer.
 4. Exportera och kvalitetsgranska EPUB/PDF samt fastställa verkligt sidomfång.
 
-## Aktuell status – v1.5
+## Aktuell status – v1.0.0-rc.1
 
 Inledning samt kapitel 1–16 är skrivna och har genomgått ett första sammanhållet språk- och repetitionspass. Researchpass v1–v9 finns i `docs/` och källregistret omfattar K-001–K-090. Två läsarbilagor har lagts till: `appendices/01-bokens-modeller.md` och `appendices/02-sjalvvardering.md`. Det fastställda omslaget finns i `assets/cover.png` och EPUB-exporten är konfigurerad att använda det. Första layoutprovet är genomfört. Numrerade kapitelrubriker exporteras nu som två centrerade rader. GitHub Actions kan bygga PDF/EPUB manuellt eller automatiskt vid publicerad release.

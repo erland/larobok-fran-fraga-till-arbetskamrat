@@ -523,8 +523,4 @@ Men när AI blir en verklig arbetskamrat uppstår nästa fråga nästan automati
 
 > Om AI behöver repositoryt, kravdokumenten, incidenthistoriken, kundinformationen och arkitekturmodellerna för att göra ett bra jobb – får vi verkligen ge den allt detta?
 
-Det är inte en fråga som kan besvaras med ett generellt ”ja” eller ”nej”.
-
-Det beror på informationen, tjänsten, avtalet, inställningarna, integrationerna och den risk organisationen accepterar.
-
-Det är ämnet för nästa kapitel.
+Svaret beror på informationen, tjänsten, avtalet, inställningarna, integrationerna och den risk organisationen accepterar.

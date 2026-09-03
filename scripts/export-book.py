@@ -16,6 +16,7 @@ PDF_CSS = ROOT / 'styles' / 'pdf.css'
 EPUB_CSS = ROOT / 'styles' / 'epub.css'
 CHAPTER_FILTER = ROOT / 'scripts' / 'chapter-headings.lua'
 SOURCES = ROOT / 'docs' / 'kallregister.md'
+COPYRIGHT = ROOT / 'frontmatter' / 'copyright.html'
 
 CHAPTERS = [
     'chapters/00-inledning.md',
@@ -37,6 +38,7 @@ CHAPTERS = [
     'chapters/16-fran-individuell-ai-anvandning-till-ai-assisterat-arbetssystem.md',
     'appendices/01-bokens-modeller.md',
     'appendices/02-sjalvvardering.md',
+    'backmatter/01-om-forfattaren.md',
 ]
 
 
@@ -92,7 +94,7 @@ def build_combined() -> tuple[str, list[str]]:
 
 
 def postprocess_epub(epub: Path) -> None:
-    """Keep EPUB navigation index, but remove nav.xhtml from normal reading order."""
+    """Keep navigation outside reading order and add a separate copyright page."""
     with tempfile.TemporaryDirectory() as td:
         temp = Path(td)
         with zipfile.ZipFile(epub, 'r') as zf:
@@ -103,12 +105,41 @@ def postprocess_epub(epub: Path) -> None:
         ET.register_namespace('', ns['opf'])
         tree = ET.parse(opf)
         root = tree.getroot()
+        manifest = root.find('opf:manifest', ns)
         spine = root.find('opf:spine', ns)
-        if spine is None:
-            raise RuntimeError('Kunde inte hitta EPUB spine i content.opf')
+        if manifest is None or spine is None:
+            raise RuntimeError('Kunde inte hitta EPUB manifest/spine i content.opf')
+
         for itemref in list(spine):
             if itemref.get('idref') == 'nav':
                 spine.remove(itemref)
+
+        copyright_xhtml = temp / 'EPUB' / 'text' / 'copyright.xhtml'
+        copyright_xhtml.write_text("""<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<!DOCTYPE html>
+<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\" lang=\"sv-SE\">
+<head><title>Copyright</title><link rel=\"stylesheet\" type=\"text/css\" href=\"../styles/stylesheet1.css\" /></head>
+<body epub:type=\"copyright-page\">
+<section class=\"copyright-page\"><div class=\"copyright-content\">
+<p><strong>Från fråga till arbetskamrat</strong><br/><em>Från enkla frågor till moget AI-assisterat arbete</em></p>
+<p>© 2026 Erland Lindmark</p>
+<p>Första upplagan, 2026<br/>Release candidate 1</p>
+<p>Text och innehåll: Erland Lindmark<br/>Omslagsbild: AI-genererad bild framtagen för denna utgåva</p>
+<p>Alla rättigheter förbehållna.</p>
+<p class=\"copyright-small\">Boken ger generell information och vägledning om AI-assisterat arbete. Den ersätter inte juridisk, informationssäkerhetsmässig eller annan professionell rådgivning för en specifik organisation eller situation.</p>
+<p class=\"copyright-small\">Produkt- och företagsnamn som förekommer i boken tillhör respektive rättighetsinnehavare. Hänvisningar till produkter och tjänster används som exempel och innebär inte rekommendation eller sponsring.</p>
+</div></section></body></html>""", encoding='utf-8')
+
+        ET.SubElement(manifest, f'{{{ns["opf"]}}}item', {
+            'id': 'copyright', 'href': 'text/copyright.xhtml', 'media-type': 'application/xhtml+xml'
+        })
+        title_index = None
+        for i, itemref in enumerate(list(spine)):
+            if (itemref.get('idref') or '').startswith('title_page'):
+                title_index = i
+                break
+        copyright_ref = ET.Element(f'{{{ns["opf"]}}}itemref', {'idref': 'copyright'})
+        spine.insert((title_index + 1) if title_index is not None else 0, copyright_ref)
         tree.write(opf, encoding='utf-8', xml_declaration=True)
 
         rebuilt = epub.with_suffix('.tmp.epub')
@@ -127,7 +158,7 @@ def run(cmd):
 
 
 def main() -> int:
-    for required in [META, COVER, PDF_CSS, EPUB_CSS, SOURCES, CHAPTER_FILTER]:
+    for required in [META, COVER, PDF_CSS, EPUB_CSS, SOURCES, CHAPTER_FILTER, COPYRIGHT]:
         if not required.exists():
             print(f'Saknar {required.relative_to(ROOT)}', file=sys.stderr)
             return 2
@@ -162,7 +193,7 @@ def main() -> int:
 
     epub = EXPORTS / 'fran-fraga-till-arbetskamrat.epub'
     run([
-        pandoc, str(combined), '--from=gfm+attributes', '--to=epub3', '--toc', '--toc-depth=1', f'--lua-filter={CHAPTER_FILTER}',
+        pandoc, str(combined), '--from=gfm+attributes', '--to=epub3', f'--metadata-file={META}', '--toc', '--toc-depth=1', f'--lua-filter={CHAPTER_FILTER}',
         '--metadata', 'title=Från fråga till arbetskamrat',
         '--metadata', 'subtitle=Från enkla frågor till moget AI-assisterat arbete',
         '--metadata', 'author=Erland Lindmark', '--metadata', 'lang=sv-SE',
@@ -172,7 +203,7 @@ def main() -> int:
 
     html = build / 'book.html'
     run([
-        pandoc, str(combined), '--from=gfm+attributes', '--to=html5', '--standalone', '--toc', '--toc-depth=1', f'--lua-filter={CHAPTER_FILTER}',
+        pandoc, str(combined), '--from=gfm+attributes', '--to=html5', '--standalone', f'--metadata-file={META}', '--toc', '--toc-depth=1', f'--lua-filter={CHAPTER_FILTER}',
         '--metadata', 'title=Från fråga till arbetskamrat',
         '--metadata', 'subtitle=Från enkla frågor till moget AI-assisterat arbete',
         '--metadata', 'author=Erland Lindmark', '--metadata', 'lang=sv-SE',
@@ -191,12 +222,30 @@ img {{width:6in;height:9in;display:block;object-fit:cover;}}
     cover_pdf = build / 'cover.pdf'
     run([weasyprint, str(cover_html), str(cover_pdf)])
 
+    copyright_html = build / 'copyright.html'
+    copyright_source = COPYRIGHT.read_text(encoding='utf-8')
+    copyright_html.write_text(f'''<!doctype html><html><head><meta charset="utf-8"><style>
+@page {{ size: 6in 9in; margin: 0.72in 0.62in 0.70in 0.68in; }}
+html,body {{ margin:0; padding:0; font-family:"Noto Serif","DejaVu Serif",serif; color:#222; font-size:9.2pt; line-height:1.42; }}
+.copyright-page {{ min-height:7.55in; display:flex; flex-direction:column; justify-content:flex-end; }}
+.copyright-content p {{ margin:0 0 0.72em 0; }}
+.copyright-small {{ font-size:8.1pt; color:#444; }}
+</style></head><body>{copyright_source}</body></html>''', encoding='utf-8')
+    copyright_pdf = build / 'copyright.pdf'
+    run([weasyprint, str(copyright_html), str(copyright_pdf)])
+
     final_pdf = EXPORTS / 'fran-fraga-till-arbetskamrat.pdf'
     from pypdf import PdfReader, PdfWriter
     writer = PdfWriter()
-    for source_pdf in [cover_pdf, content_pdf]:
-        for page in PdfReader(str(source_pdf)).pages:
-            writer.add_page(page)
+    for page in PdfReader(str(cover_pdf)).pages:
+        writer.add_page(page)
+    content_pages = list(PdfReader(str(content_pdf)).pages)
+    if content_pages:
+        writer.add_page(content_pages[0])
+    for page in PdfReader(str(copyright_pdf)).pages:
+        writer.add_page(page)
+    for page in content_pages[1:]:
+        writer.add_page(page)
     writer.add_metadata({
         '/Title': 'Från fråga till arbetskamrat',
         '/Author': 'Erland Lindmark',
